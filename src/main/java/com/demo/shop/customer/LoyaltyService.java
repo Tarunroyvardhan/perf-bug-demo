@@ -3,7 +3,9 @@ package com.demo.shop.customer;
 import com.demo.shop.model.Order;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LoyaltyService {
 
@@ -17,9 +19,10 @@ public class LoyaltyService {
      * Returns the orders placed by loyalty-programme members, so they can earn points.
      */
     public List<Order> ordersFromLoyaltyMembers(List<Order> orders) {
+        Set<String> members = new HashSet<>(loyaltyMemberIds);
         List<Order> result = new ArrayList<>();
         for (Order order : orders) {
-            if (loyaltyMemberIds.contains(order.getCustomerId())) {
+            if (members.contains(order.getCustomerId())) {
                 result.add(order);
             }
         }
